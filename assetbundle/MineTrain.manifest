@@ -1,0 +1,36 @@
+ManifestFileVersion: 0
+CRC: 874891261
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d289a774391fe224ec0f1408325b5572
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f47e5080155a0c3ac2e9ffbbc14e366d
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/Angle_support_1.prefab
+- Assets/Support_1.prefab
+- Assets/End_Support.prefab
+- Assets/Half_Support.prefab
+- Assets/Cart.prefab
+- Assets/Front_Car.prefab
+- Assets/Angle_support_2.prefab
+- Assets/Support_3 1.prefab
+- Assets/Support_2.prefab
+Dependencies: []
