@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1698040989
+CRC: 2210997565
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1f6940a5bdfaba6ecb6fddee6db8386e
+    Hash: 15788687a98bceee798e84492ff75a06
   TypeTreeHash:
     serializedVersion: 2
     Hash: 18f88a6a41a39d45481574f548d1d50a
@@ -30,4 +30,6 @@ ClassTypes:
 Assets:
 - Assets/Truck.prefab
 - Assets/Cart.prefab
+- Assets/MouseCar.prefab
+- Assets/SportsCar.prefab
 Dependencies: []

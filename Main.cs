@@ -29,15 +29,7 @@ public class Main : IMod
             }
         }
 
-      
-
         TrackedRide trackRider = UnityEngine.Object.Instantiate (selected);
-
-        /*MineTrainSupportInstantiator supportInstaiator = ScriptableObject.CreateInstance<MineTrainSupportInstantiator> ();
-        AssetManager.Instance.registerObject (supportInstaiator);
-        registeredObjects.Add (supportInstaiator);
-        supportInstaiator.baseMaterial = selected.meshGenerator.material;
-*/
 
         trackRider.canChangeCarRotation = false;
         trackRider.meshGenerator = selected.meshGenerator;// ScriptableObject.CreateInstance<MinetrainTrackGenerator> ();
@@ -52,64 +44,86 @@ public class Main : IMod
         Color[] colors = new Color[] { new Color(63f / 255f, 46f / 255f, 37f / 255f, 1), new Color(43f / 255f, 35f / 255f, 35f / 255f, 1), new Color(90f / 255f, 90f / 255f, 90f / 255f, 1) };
         trackRider.meshGenerator.customColors = colors;
         trackRider.meshGenerator.customColors = colors;
-        trackRider.setDisplayName("MineTrain Coaster");
-        trackRider.price = 3600;
-        trackRider.name = "car_ride_coaster_GO" ;
+        trackRider.setDisplayName("Car Ride");
+        trackRider.price = 1200;
+        trackRider.name = "car_ride_coaster_GO" + HASH ;
         AssetManager.Instance.registerObject (trackRider);
         registeredObjects.Add (trackRider);
 
+
+        List<CoasterCarInstantiator> trains = new List<CoasterCarInstantiator> ();
+       
+
+        trains.Add (this.AddCar(
+            Main.AssetBundleManager.MouseCarGo,
+            "Mouse Car",
+            "Mouse_Car",
+            new Color[] { new Color(68f / 255, 58f / 255, 50f / 255), new Color(176f / 255, 7f / 255, 7f / 255), new Color(55f / 255, 32f / 255, 12f / 255),new Color(61f / 255, 40f / 255, 19f / 255)},
+            .1f,.1f));
+
+        trains.Add (this.AddCar(
+            Main.AssetBundleManager.TruckGo,
+            "Truck",
+            "Truck_Car",
+            new Color[] { new Color(68f / 255, 58f / 255, 50f / 255), new Color(176f / 255, 7f / 255, 7f / 255), new Color(55f / 255, 32f / 255, 12f / 255),new Color(61f / 255, 40f / 255, 19f / 255)},
+            .2f,.2f));
+
+        trains.Add (this.AddCar(
+            Main.AssetBundleManager.SportsCarGo,
+            "Sports Car",
+            "Sports_Car",
+            new Color[] { new Color(68f / 255, 58f / 255, 50f / 255), new Color(176f / 255, 7f / 255, 7f / 255), new Color(55f / 255, 32f / 255, 12f / 255),new Color(61f / 255, 40f / 255, 19f / 255)},
+            .2f,.2f));
+
+        trackRider.carTypes = trains.ToArray();
+
+        hider.SetActive (false);
+
+	}
+
+    private CoasterCarInstantiator AddCar(GameObject model,string display,string name,Color[] colors,float frontOffset, float backOffset)
+    {
         //get car
-        GameObject frontcarGo = UnityEngine.GameObject.Instantiate(Main.AssetBundleManager.CarGo);
+        GameObject frontcarGo = UnityEngine.GameObject.Instantiate(model);
         Rigidbody frontcarRigid = frontcarGo.AddComponent<Rigidbody> ();
         frontcarRigid.isKinematic = true;
         frontcarGo.AddComponent<BoxCollider> ();
 
         //add Component
         CarCar frontCar = frontcarGo.AddComponent<CarCar> ();
-        frontCar.name = "MineTrainCar_Front" + HASH;
+        MakeRecolorble(frontcarGo, "CustomColorsDiffuse", colors);
+        frontCar.name = name + "_Front" + HASH;
 
-        frontCar.offsetFront = .6f;
+        frontCar.offsetFront = frontOffset;
+        frontCar.offsetBack = backOffset;
+
         frontCar.Decorate (true);
 
         CoasterCarInstantiator coasterCarInstantiator = ScriptableObject.CreateInstance<CoasterCarInstantiator> ();
-        List<CoasterCarInstantiator> trains = new List<CoasterCarInstantiator>();
 
-        coasterCarInstantiator.name = "Mine Train@CoasterCarInstantiator" + HASH;
+        coasterCarInstantiator.name = name+"@CoasterCarInstantiator" + HASH;
         coasterCarInstantiator.defaultTrainLength = 1;
         coasterCarInstantiator.maxTrainLength = 1;
         coasterCarInstantiator.minTrainLength = 1;
-       coasterCarInstantiator.frontCarGO = frontcarGo;
+        coasterCarInstantiator.frontCarGO = frontcarGo;
+        coasterCarInstantiator.displayName = display;
+
+        //Restraints
+        RestraintRotationController controllerFront = frontcarGo.AddComponent<RestraintRotationController>();
+        controllerFront.closedAngles = new Vector3(0, 0, 120);
+        frontcarGo.transform.parent = hider.transform;
+
+        AssetManager.Instance.registerObject (coasterCarInstantiator);
+        registeredObjects.Add (coasterCarInstantiator);
+
 
         //register cars
         AssetManager.Instance.registerObject (frontCar);
         registeredObjects.Add (frontCar);
 
-        //Offset
-        float CarOffset = .02f;
-        frontCar.offsetBack = CarOffset;
+        return coasterCarInstantiator;
 
-        //Restraints
-        RestraintRotationController controllerFront = frontcarGo.AddComponent<RestraintRotationController>();
-        controllerFront.closedAngles = new Vector3(0, 0, 120);
-
-
-        //Custom Colors
-        Color[] CarColors = new Color[] { new Color(68f / 255, 58f / 255, 50f / 255), new Color(176f / 255, 7f / 255, 7f / 255), new Color(55f / 255, 32f / 255, 12f / 255),new Color(61f / 255, 40f / 255, 19f / 255)};
-
-        MakeRecolorble(frontcarGo, "CustomColorsDiffuse", CarColors);
-
-        coasterCarInstantiator.displayName = "MineTrain Car";
-        AssetManager.Instance.registerObject (coasterCarInstantiator);
-        registeredObjects.Add (coasterCarInstantiator);
-
-        trains.Add (coasterCarInstantiator);
-
-        trackRider.carTypes = trains.ToArray();
-
-        hider.SetActive (false);
-       frontcarGo.transform.parent = hider.transform;
-
-	}
+    }
 
     private void MakeRecolorble(GameObject GO, string shader, Color[] colors)
     {

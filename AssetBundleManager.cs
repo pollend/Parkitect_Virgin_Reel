@@ -5,17 +5,18 @@ using System.Collections.Generic;
 public class AssetBundleManager
 {
 	private Main Main {get;set;}
-    public GameObject CarGo;
-
+    public GameObject TruckGo;
+    public GameObject MouseCarGo;
+    public GameObject SportsCarGo;
 
 
 
 	public AssetBundleManager (Main main)
 	{
 		this.Main = main;
-        CarGo = LoadAsset<GameObject> ("Truck");
-
-
+        TruckGo = LoadAsset<GameObject> ("Truck");
+        MouseCarGo = LoadAsset<GameObject> ("MouseCar");
+        SportsCarGo = LoadAsset<GameObject> ("SportsCar");
 
 
     }
