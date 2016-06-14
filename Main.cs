@@ -39,7 +39,8 @@ public class Main : IMod
         trackRider.meshGenerator.frictionWheelsGO = selected.meshGenerator.frictionWheelsGO;
         trackRider.meshGenerator.supportInstantiator =selected.meshGenerator.supportInstantiator;
         trackRider.meshGenerator.crossBeamGO = selected.meshGenerator.crossBeamGO;
-
+        trackRider.targetVelocity = 7f;
+        trackRider.maximumVelocity = 7f;
 
         Color[] colors = new Color[] { new Color(63f / 255f, 46f / 255f, 37f / 255f, 1), new Color(43f / 255f, 35f / 255f, 35f / 255f, 1), new Color(90f / 255f, 90f / 255f, 90f / 255f, 1) };
         trackRider.meshGenerator.customColors = colors;
@@ -58,22 +59,23 @@ public class Main : IMod
             Main.AssetBundleManager.MouseCarGo,
             "Mouse Car",
             "Mouse_Car",
-            new Color[] { new Color(68f / 255, 58f / 255, 50f / 255), new Color(176f / 255, 7f / 255, 7f / 255), new Color(55f / 255, 32f / 255, 12f / 255),new Color(61f / 255, 40f / 255, 19f / 255)},
-            .1f,.1f));
+            new Color[] { new Color(71f / 255, 71f / 255, 71f / 255), new Color(176f / 255, 7f / 255, 7f / 255), new Color(26f / 255, 26f / 255, 26f / 255),new Color(31f / 255, 31f / 255, 31f / 255)},
+            .3f,.1f));
 
         trains.Add (this.AddCar(
             Main.AssetBundleManager.TruckGo,
             "Truck",
             "Truck_Car",
             new Color[] { new Color(68f / 255, 58f / 255, 50f / 255), new Color(176f / 255, 7f / 255, 7f / 255), new Color(55f / 255, 32f / 255, 12f / 255),new Color(61f / 255, 40f / 255, 19f / 255)},
-            .2f,.2f));
+            .3f,.35f));
 
         trains.Add (this.AddCar(
             Main.AssetBundleManager.SportsCarGo,
             "Sports Car",
             "Sports_Car",
-            new Color[] { new Color(68f / 255, 58f / 255, 50f / 255), new Color(176f / 255, 7f / 255, 7f / 255), new Color(55f / 255, 32f / 255, 12f / 255),new Color(61f / 255, 40f / 255, 19f / 255)},
-            .2f,.2f));
+            new Color[] { new Color(.949f, .141f, .145f), new Color(.925f, .937f, .231f), new Color(.754f, .754f, .754f),new Color(.788f,.788f, .788f)},
+            .3f,.35f));
+        
 
         trackRider.carTypes = trains.ToArray();
 
@@ -107,6 +109,7 @@ public class Main : IMod
         coasterCarInstantiator.minTrainLength = 1;
         coasterCarInstantiator.frontCarGO = frontcarGo;
         coasterCarInstantiator.displayName = display;
+
 
         //Restraints
         RestraintRotationController controllerFront = frontcarGo.AddComponent<RestraintRotationController>();
@@ -164,12 +167,12 @@ public class Main : IMod
 
     public string Name
     {
-        get { return "Mine Train Coaster"; }
+        get { return "Car Ride"; }
     }
 
     public string Description
     {
-        get { return "Mine Train Coaster"; }
+        get { return "A gental ride that follows a central guide rail. The cars are self powered and follow the main guide rail."; }
     }
 
 
