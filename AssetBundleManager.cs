@@ -13,7 +13,7 @@ public class AssetBundleManager
 	public AssetBundleManager (Main main)
 	{
 		this.Main = main;
-        CarGo = LoadAsset<GameObject> ("Cart");
+        CarGo = LoadAsset<GameObject> ("Truck");
 
 
 
