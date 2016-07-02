@@ -6,7 +6,7 @@ public class Main : IMod
     public string Identifier { get; set; }
 	public static AssetBundleManager AssetBundleManager = null;
     public static Configuration Configeration = null;
-    public static string HASH = "asfa3nsd1wye1f4byabbasydbf";
+    public static string HASH = "asdfasdfabeawefawefv";
 
     private List<UnityEngine.Object> registeredObjects = new List<UnityEngine.Object>();
 
@@ -38,15 +38,17 @@ public class Main : IMod
         trackRider.meshGenerator.frictionWheelsGO = selected.meshGenerator.frictionWheelsGO;
         trackRider.meshGenerator.supportInstantiator =selected.meshGenerator.supportInstantiator;
         trackRider.meshGenerator.crossBeamGO = this.SetUV(Main.AssetBundleManager.SideCrossBeamGo,15,14);
-  
+        
 
         Color[] colors = new Color[] { new Color(63f / 255f, 46f / 255f, 37f / 255f, 1), new Color(43f / 255f, 35f / 255f, 35f / 255f, 1), new Color(90f / 255f, 90f / 255f, 90f / 255f, 1) };
         trackRider.meshGenerator.customColors = colors;
         trackRider.meshGenerator.customColors = colors;
         trackRider.setDisplayName("Virgina Reel");
         trackRider.price = 1200;
-        trackRider.name = "car_ride_coaster_GO" + HASH ;
+        trackRider.name = "virginia_reel_go" + HASH ;
+        trackRider.maxBankingAngle = 0;
         trackRider.min90CurveSize = 1;
+
         AssetManager.Instance.registerObject (trackRider);
         registeredObjects.Add (trackRider);
 
@@ -58,7 +60,7 @@ public class Main : IMod
             Main.AssetBundleManager.CartGo,
             "Reel",
             "Reel_Car",
-            new Color[] { new Color(71f / 255, 71f / 255, 71f / 255), new Color(176f / 255, 7f / 255, 7f / 255), new Color(26f / 255, 26f / 255, 26f / 255),new Color(31f / 255, 31f / 255, 31f / 255)},
+            new Color[] { new Color(71f / 255, 71f / 255, 71f / 255), new Color(176f / 255, 7f / 255, 7f / 255), new Color(26f / 255, 26f / 255, 26f / 255)},
             .3f,.1f));
 
         
@@ -165,12 +167,12 @@ public class Main : IMod
     }
     public string Name
     {
-        get { return "Car Ride"; }
+        get { return "Virginia Reel"; }
     }
 
     public string Description
     {
-        get { return "A gental ride that follows a central guide rail. The cars are self powered and follow the main guide rail."; }
+        get { return "The Virginia reel  uses side friction like tracks. The tubs, have inward facing seating which spin freely on a chassis. The tubs are spun as they contacted the edges of the trough."; }
     }
 
 
