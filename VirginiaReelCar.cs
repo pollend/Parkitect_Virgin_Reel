@@ -36,11 +36,11 @@ public class VirginiaReelCar : Car
 
         float angle = MathHelper.AngleSigned (previous_dir,tangent_axis, normal_axis) ;
         if (Mathf.Abs (angle) > .01f) {
-            rotational_speed = ((Mathf.Sign (angle) * this.train.velocity * Time.deltaTime) / (.4f * Mathf.PI)) * Mathf.Rad2Deg;
+            rotational_speed =  ((Mathf.Sign (angle) * Mathf.Sin(Mathf.Abs(angle))  * this.train.velocity * 2f* Time.deltaTime ) / (.1f * Mathf.PI)) * Mathf.Rad2Deg;
         }
         else
         {
-            rotational_speed -= this.rotational_speed * .99f * Time.deltaTime;
+            rotational_speed -= this.rotational_speed * .8f * Time.deltaTime;
         }
         this.rotator.localRotation *= Quaternion.AngleAxis (rotational_speed, Vector3.up);
         base.onRepositionAxis (frontAxisPosition, backAxisPosition);
