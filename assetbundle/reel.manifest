@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2214798188
+CRC: 3992915965
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e2ffe1b2fa2f44bf6b8f539325c79420
+    Hash: 89465145bdd1d4a3c20dd8fc219cbcce
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f47e5080155a0c3ac2e9ffbbc14e366d
+    Hash: e6d74f2d6b370c4d26f3cae461538e43
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -17,6 +17,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 23
   Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
 - Class: 33
   Script: {instanceID: 0}
 - Class: 43
@@ -25,4 +27,5 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Cart.prefab
+- Assets/SideCrossBeams.prefab
 Dependencies: []

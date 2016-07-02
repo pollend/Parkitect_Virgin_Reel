@@ -6,13 +6,13 @@ public class AssetBundleManager
 {
 	private Main Main {get;set;}
     public GameObject CartGo;
-
+    public GameObject SideCrossBeamGo;
 
 	public AssetBundleManager (Main main)
 	{
 		this.Main = main;
         CartGo = LoadAsset<GameObject> ("Cart");
-
+        SideCrossBeamGo = LoadAsset<GameObject> ("SideCrossBeams");
     }
 
 

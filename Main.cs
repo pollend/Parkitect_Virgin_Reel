@@ -24,21 +24,21 @@ public class Main : IMod
         foreach (Attraction t in AssetManager.Instance.getAttractionObjects ()) {
             if (t.getUnlocalizedName() == "Wooden Coaster") {
                 selected = (TrackedRide)t;
-                break;
-                    
+                break;     
             }
         }
 
         TrackedRide trackRider = UnityEngine.Object.Instantiate (selected);
 
         trackRider.canChangeCarRotation = false;
-        trackRider.meshGenerator = selected.meshGenerator;// ScriptableObject.CreateInstance<MinetrainTrackGenerator> ();
+        trackRider.meshGenerator =  ScriptableObject.CreateInstance<VirginiaReelTrackGenerator> ();
         trackRider.meshGenerator.stationPlatformGO = selected.meshGenerator.stationPlatformGO;
         trackRider.meshGenerator.material = selected.meshGenerator.material;
         trackRider.meshGenerator.liftMaterial = selected.meshGenerator.liftMaterial;
         trackRider.meshGenerator.frictionWheelsGO = selected.meshGenerator.frictionWheelsGO;
         trackRider.meshGenerator.supportInstantiator =selected.meshGenerator.supportInstantiator;
-        trackRider.meshGenerator.crossBeamGO = selected.meshGenerator.crossBeamGO;
+        trackRider.meshGenerator.crossBeamGO = this.SetUV(Main.AssetBundleManager.SideCrossBeamGo,15,14);
+  
 
         Color[] colors = new Color[] { new Color(63f / 255f, 46f / 255f, 37f / 255f, 1), new Color(43f / 255f, 35f / 255f, 35f / 255f, 1), new Color(90f / 255f, 90f / 255f, 90f / 255f, 1) };
         trackRider.meshGenerator.customColors = colors;
@@ -150,7 +150,19 @@ public class Main : IMod
         }
         UnityEngine.GameObject.DestroyImmediate (hider);
 	}
+    GameObject SetUV(GameObject GO, int gridX, int gridY)
+    {
+        Mesh mesh = GO.GetComponent<MeshFilter>().mesh;
+        Vector3[] vertices = mesh.vertices;
+        Vector2[] uvs = new Vector2[vertices.Length];
 
+        for (int i = 0; i < uvs.Length; i++)
+        {
+            uvs[i] = new Vector2(0.0625f * ((float)gridX + 0.5f), 1f - 0.0625f * ((float)gridY + 0.5f));
+        }
+        mesh.uv = uvs;
+        return GO;
+    }
     public string Name
     {
         get { return "Car Ride"; }

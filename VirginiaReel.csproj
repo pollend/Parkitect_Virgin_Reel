@@ -64,6 +64,7 @@
     <Compile Include="GameObjectHelper.cs" />
     <Compile Include="VirginiaReelCar.cs" />
     <Compile Include="MathHelper.cs" />
+    <Compile Include="VirginiaReelTrackGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

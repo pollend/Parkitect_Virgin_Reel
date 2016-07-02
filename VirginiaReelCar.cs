@@ -6,12 +6,11 @@ public class VirginiaReelCar : Car
 {
 
     private const float radius = .4f;
-
+    private const float timeSpentRotating = 3f;
 
     private Transform rotator;
     private float rotational_speed = 0f;
     private Vector3 previous_dir = Vector3.zero;
-    private Vector3 force = Vector3.zero;
 
     public void Decorate(bool isFront)
     {
@@ -25,6 +24,7 @@ public class VirginiaReelCar : Car
     protected override void Awake ()
     {
         rotator = transform.Find ("rotator");
+    
         base.Awake ();
     }
 
@@ -32,22 +32,39 @@ public class VirginiaReelCar : Car
     {
         Vector3 tangent_axis = this.track.getTangentPoint (backAxisPosition);
         Vector3 normal_axis = this.track.getNormalPoint (backAxisPosition);
-        Vector3 binormal = Vector3.Cross(normal_axis, tangent_axis).normalized;
+        Vector3 binormal = Vector3.Cross (normal_axis, tangent_axis).normalized;
 
-        float angle = MathHelper.AngleSigned (previous_dir,tangent_axis, normal_axis) ;
-        if (Mathf.Abs (angle) > .01f) {
-            rotational_speed =  ((Mathf.Sign (angle) * Mathf.Sin(Mathf.Abs(angle))  * this.train.velocity * 2f* Time.deltaTime ) / (.1f * Mathf.PI)) * Mathf.Rad2Deg;
-        }
-        else
+
+        TrackSegment4 track = this.track.trackSegments [(int)backAxisPosition];
+
+        if (!(track is Station)) {    
+            float angle = MathHelper.AngleSigned (previous_dir, tangent_axis, normal_axis);
+            if (Mathf.Abs (angle) > .01f) {
+                rotational_speed = ((Mathf.Sign (angle) * Mathf.Sin (Mathf.Abs (angle)) * this.train.velocity * 2f * Time.deltaTime) / (.1f * Mathf.PI)) * Mathf.Rad2Deg;
+            } else {
+                rotational_speed -= this.rotational_speed * .8f * Time.deltaTime;
+            }
+            this.rotator.localRotation *= Quaternion.AngleAxis (rotational_speed, Vector3.up);
+       } else
         {
-            rotational_speed -= this.rotational_speed * .8f * Time.deltaTime;
+            if (Quaternion.Angle (Quaternion.identity, this.rotator.localRotation) > 5f) {
+                this.rotator.localRotation *= Quaternion.AngleAxis (Time.deltaTime * 40f, Vector3.up);
+            }
+                // this.rotator.localRotation = Quaternion.Lerp (this.rotator.localRotation, Quaternion.identity, (Time.time - startTime) * 1.0f);
         }
-        this.rotator.localRotation *= Quaternion.AngleAxis (rotational_speed, Vector3.up);
         base.onRepositionAxis (frontAxisPosition, backAxisPosition);
 
         previous_dir = tangent_axis;
 
   
+    }
+
+    public override bool isReadyForLettingGuestsInAndOut ()
+    {
+        if (Quaternion.Angle (Quaternion.identity, this.rotator.localRotation) > 5f) {
+            return false;
+        }
+        return base.isReadyForLettingGuestsInAndOut ();
     }
 
 
