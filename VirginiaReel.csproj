@@ -62,7 +62,8 @@
     <Compile Include="AssetBundleManager.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="GameObjectHelper.cs" />
-    <Compile Include="CarCar.cs" />
+    <Compile Include="VirginiaReelCar.cs" />
+    <Compile Include="MathHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

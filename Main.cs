@@ -6,7 +6,7 @@ public class Main : IMod
     public string Identifier { get; set; }
 	public static AssetBundleManager AssetBundleManager = null;
     public static Configuration Configeration = null;
-    public static string HASH = "asdfawujeba8whe9jnimpiasnd";
+    public static string HASH = "asfa3nsd1wye1f4byabbasydbf";
 
     private List<UnityEngine.Object> registeredObjects = new List<UnityEngine.Object>();
 
@@ -22,7 +22,7 @@ public class Main : IMod
 
         TrackedRide selected = null;
         foreach (Attraction t in AssetManager.Instance.getAttractionObjects ()) {
-            if (t.getUnlocalizedName() == "Ghost Mansion Ride") {
+            if (t.getUnlocalizedName() == "Wooden Coaster") {
                 selected = (TrackedRide)t;
                 break;
                     
@@ -39,15 +39,14 @@ public class Main : IMod
         trackRider.meshGenerator.frictionWheelsGO = selected.meshGenerator.frictionWheelsGO;
         trackRider.meshGenerator.supportInstantiator =selected.meshGenerator.supportInstantiator;
         trackRider.meshGenerator.crossBeamGO = selected.meshGenerator.crossBeamGO;
-        trackRider.targetVelocity = 7f;
-        trackRider.maximumVelocity = 7f;
 
         Color[] colors = new Color[] { new Color(63f / 255f, 46f / 255f, 37f / 255f, 1), new Color(43f / 255f, 35f / 255f, 35f / 255f, 1), new Color(90f / 255f, 90f / 255f, 90f / 255f, 1) };
         trackRider.meshGenerator.customColors = colors;
         trackRider.meshGenerator.customColors = colors;
-        trackRider.setDisplayName("Car Ride");
+        trackRider.setDisplayName("Virgina Reel");
         trackRider.price = 1200;
         trackRider.name = "car_ride_coaster_GO" + HASH ;
+        trackRider.min90CurveSize = 1;
         AssetManager.Instance.registerObject (trackRider);
         registeredObjects.Add (trackRider);
 
@@ -56,25 +55,12 @@ public class Main : IMod
        
 
         trains.Add (this.AddCar(
-            Main.AssetBundleManager.MouseCarGo,
-            "Mouse Car",
-            "Mouse_Car",
+            Main.AssetBundleManager.CartGo,
+            "Reel",
+            "Reel_Car",
             new Color[] { new Color(71f / 255, 71f / 255, 71f / 255), new Color(176f / 255, 7f / 255, 7f / 255), new Color(26f / 255, 26f / 255, 26f / 255),new Color(31f / 255, 31f / 255, 31f / 255)},
             .3f,.1f));
 
-        trains.Add (this.AddCar(
-            Main.AssetBundleManager.TruckGo,
-            "Truck",
-            "Truck_Car",
-            new Color[] { new Color(68f / 255, 58f / 255, 50f / 255), new Color(176f / 255, 7f / 255, 7f / 255), new Color(55f / 255, 32f / 255, 12f / 255),new Color(61f / 255, 40f / 255, 19f / 255)},
-            .3f,.35f));
-
-        trains.Add (this.AddCar(
-            Main.AssetBundleManager.SportsCarGo,
-            "Sports Car",
-            "Sports_Car",
-            new Color[] { new Color(.949f, .141f, .145f), new Color(.925f, .937f, .231f), new Color(.754f, .754f, .754f),new Color(.788f,.788f, .788f)},
-            .3f,.35f));
         
 
         trackRider.carTypes = trains.ToArray();
@@ -92,7 +78,7 @@ public class Main : IMod
         frontcarGo.AddComponent<BoxCollider> ();
 
         //add Component
-        CarCar frontCar = frontcarGo.AddComponent<CarCar> ();
+        VirginiaReelCar frontCar = frontcarGo.AddComponent<VirginiaReelCar> ();
         MakeRecolorble(frontcarGo, "CustomColorsDiffuse", colors);
         frontCar.name = name + "_Front" + HASH;
 

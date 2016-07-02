@@ -5,19 +5,13 @@ using System.Collections.Generic;
 public class AssetBundleManager
 {
 	private Main Main {get;set;}
-    public GameObject TruckGo;
-    public GameObject MouseCarGo;
-    public GameObject SportsCarGo;
-
+    public GameObject CartGo;
 
 
 	public AssetBundleManager (Main main)
 	{
 		this.Main = main;
-        TruckGo = LoadAsset<GameObject> ("Truck");
-        MouseCarGo = LoadAsset<GameObject> ("MouseCar");
-        SportsCarGo = LoadAsset<GameObject> ("SportsCar");
-
+        CartGo = LoadAsset<GameObject> ("Cart");
 
     }
 
@@ -30,7 +24,7 @@ public class AssetBundleManager
 			T asset;
 
 			char dsc = System.IO.Path.DirectorySeparatorChar;
-			using (WWW www = new WWW("file://" + Main.Path + dsc + "assetbundle" + dsc + "Car"))
+            using (WWW www = new WWW("file://" + Main.Path + dsc + "assetbundle" + dsc + "reel"))
 			{
 
 				if (www.error != null)
