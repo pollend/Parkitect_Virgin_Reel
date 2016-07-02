@@ -43,7 +43,7 @@ public class Main : IMod
         Color[] colors = new Color[] { new Color(63f / 255f, 46f / 255f, 37f / 255f, 1), new Color(43f / 255f, 35f / 255f, 35f / 255f, 1), new Color(90f / 255f, 90f / 255f, 90f / 255f, 1) };
         trackRider.meshGenerator.customColors = colors;
         trackRider.meshGenerator.customColors = colors;
-        trackRider.setDisplayName("Virgina Reel");
+        trackRider.setDisplayName("Virginia Reel");
         trackRider.price = 1200;
         trackRider.name = "virginia_reel_go" + HASH ;
         trackRider.maxBankingAngle = 0;
