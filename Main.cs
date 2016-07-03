@@ -49,6 +49,8 @@ public class Main : IMod
         trackRider.maxBankingAngle = 0;
         trackRider.min90CurveSize = 1;
 
+
+
         AssetManager.Instance.registerObject (trackRider);
         registeredObjects.Add (trackRider);
 
@@ -97,6 +99,7 @@ public class Main : IMod
         coasterCarInstantiator.minTrainLength = 1;
         coasterCarInstantiator.frontCarGO = frontcarGo;
         coasterCarInstantiator.displayName = display;
+       
 
 
         //Restraints
