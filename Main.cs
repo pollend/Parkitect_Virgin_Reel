@@ -89,8 +89,6 @@ public class Main : IMod
         frontCar.offsetFront = frontOffset;
         frontCar.offsetBack = backOffset;
 
-        frontCar.Decorate (true);
-
         CoasterCarInstantiator coasterCarInstantiator = ScriptableObject.CreateInstance<CoasterCarInstantiator> ();
 
         coasterCarInstantiator.name = name+"@CoasterCarInstantiator" + HASH;
