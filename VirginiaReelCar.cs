@@ -1,8 +1,9 @@
 ﻿using System;
 using UnityEngine;
+using TrackedRiderUtility;
 
 
-public class VirginiaReelCar : Car
+public class VirginiaReelCar : BaseCar
 {
 
     private const float radius = .4f;
