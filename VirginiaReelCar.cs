@@ -35,11 +35,11 @@ public class VirginiaReelCar : BaseCar
 			TrackSegment4 track = this.track.trackSegments [(int)backAxisPosition];
 			if (!(track is Station)) {
 				float angle = MathHelper.AngleSigned (tangent_axis, next_tangent_axis, normal_axis);
-				rotational_speed += ((Mathf.Sign (angle) * Mathf.Sin (Mathf.Abs (angle)) * this.train.velocity * Time.deltaTime * 1.6f) / (.2f * Mathf.PI)) * Mathf.Rad2Deg * Time.deltaTime;
+				rotational_speed += ((Mathf.Sign (angle) * Mathf.Sin (Mathf.Abs (angle)) * this.train.velocity * Time.deltaTime * 2f) / (.2f * Mathf.PI)) * Mathf.Rad2Deg * Time.deltaTime;
                 if(Mathf.Abs (angle) < .2f)
                 rotational_speed -= this.rotational_speed * .6f * Time.deltaTime;
 
-               if (this.rotational_speed > maxRotation )
+                if (Mathf.Abs(this.rotational_speed) > maxRotation )
                     this.rotational_speed = maxRotation * Mathf.Sign(this.rotational_speed);
 
 				float additional_rotation = ((Mathf.Sign (angle) * Mathf.Sin (Mathf.Abs (angle)) * this.train.velocity) / (.2f * Mathf.PI)) * Mathf.Rad2Deg * Time.deltaTime;
