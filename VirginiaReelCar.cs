@@ -9,14 +9,13 @@ public class VirginiaReelCar : BaseCar
 	private const float radius = .4f;
 	private const float timeSpentRotating = 3f;
 
-	private Transform rotator;
 	private float rotational_speed = 0f;
 	private float maxRotation = 70f;
 
 
 	protected override void Awake ()
 	{
-		rotator = transform.Find ("rotator");
+        this.carRotationAxis = transform.Find ("rotator");
 		frontAxis = transform.Find ("frontAxis");
 		backAxis = transform.Find ("backAxis");
 		base.Awake ();
@@ -44,12 +43,12 @@ public class VirginiaReelCar : BaseCar
 
 				float additional_rotation = ((Mathf.Sign (angle) * Mathf.Sin (Mathf.Abs (angle)) * this.train.velocity) / (.2f * Mathf.PI)) * Mathf.Rad2Deg * Time.deltaTime;
 
-				this.rotator.localRotation *= Quaternion.AngleAxis (additional_rotation+rotational_speed, Vector3.up);
+                this.carRotationAxis.localRotation *= Quaternion.AngleAxis (additional_rotation+rotational_speed, Vector3.up);
 			} else {
 				rotational_speed -= this.rotational_speed * .6f * Time.deltaTime;
 
-				if (Quaternion.Angle (Quaternion.identity, this.rotator.localRotation) > 5f) {
-					this.rotator.localRotation *= Quaternion.AngleAxis (rotational_speed + Time.deltaTime * 40f, Vector3.up);
+                if (Quaternion.Angle (Quaternion.identity, this.carRotationAxis.localRotation) > 5f) {
+                    this.carRotationAxis.localRotation *= Quaternion.AngleAxis (rotational_speed + Time.deltaTime * 40f, Vector3.up);
 				}
 			}
 		}
@@ -62,7 +61,7 @@ public class VirginiaReelCar : BaseCar
 
 	public override bool isReadyForLettingGuestsInAndOut ()
 	{
-		if (Quaternion.Angle (Quaternion.identity, this.rotator.localRotation) > 5f) {
+        if (Quaternion.Angle (Quaternion.identity, this.carRotationAxis.localRotation) > 5f) {
 			return false;
 		}
 		return base.isReadyForLettingGuestsInAndOut ();

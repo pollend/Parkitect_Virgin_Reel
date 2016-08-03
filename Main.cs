@@ -29,6 +29,7 @@ public class Main : IMod
         trackedRide.min90CurveSize = 1;
         trackedRide.carTypes = new CoasterCarInstantiator[]{ };
         trackedRide.meshGenerator.customColors = new Color[] { new Color(63f / 255f, 46f / 255f, 37f / 255f, 1), new Color(43f / 255f, 35f / 255f, 35f / 255f, 1), new Color(90f / 255f, 90f / 255f, 90f / 255f, 1) };
+        trackedRide.canChangeCarRotation = true;
 
         CoasterCarInstantiator coasterCarInstantiator = binder.RegisterCoasterCarInstaniator<CoasterCarInstantiator> (trackedRide, "VirginiaReelInstantiator", "Virginia Reel Car", 1, 1, 1);
         VirginiaReelCar virginiaReelCar =  binder.RegisterCar<VirginiaReelCar> ( Main.AssetBundleManager.CartGo,"VirginiaReelCar", .3f,.1f,true, new Color[] { 
