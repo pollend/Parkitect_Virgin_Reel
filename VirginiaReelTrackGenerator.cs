@@ -80,7 +80,7 @@ public class VirginiaReelTrackGenerator: MeshGenerator
 
     public override Mesh getMesh (GameObject putMeshOnGO)
     {
-        return default(MeshCombiner).start().add(new Extruder[]
+        return MeshCombiner.start().add(new Extruder[]
             {
                 trackBase,
                 leftRail,
