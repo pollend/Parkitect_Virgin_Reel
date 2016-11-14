@@ -51,7 +51,7 @@ public class VirginiaReelTrackGenerator: MeshGenerator
     {
         base.sampleAt(trackSegment, t);
         Vector3 normal = trackSegment.getNormal(t);
-        Vector3 trackPivot = base.getTrackPivot(trackSegment.getPoint(t), normal);
+        Vector3 trackPivot = base.getTrackPivot(trackSegment.getPoint(t,0), normal);
         Vector3 tangentPoint = trackSegment.getTangentPoint(t);
         Vector3 binormal = Vector3.Cross(normal, tangentPoint).normalized;
 
