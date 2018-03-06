@@ -60,6 +60,7 @@ public class VirginiaReelCar : BaseCar
 				}
 			}
 		}
+		base.reposition(deltaTime,position,lane,previousCar);
 	}
 
 

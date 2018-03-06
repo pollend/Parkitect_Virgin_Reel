@@ -33,7 +33,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Parkitect, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\Parkitect_Data\Managed\Parkitect.dll</HintPath>
+      <HintPath>../../Parkitect_Data/Managed/Parkitect.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Parkitect, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\Parkitect_Data\Managed\Parkitect.dll</HintPath>
@@ -42,30 +43,43 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\Parkitect_Data\Managed\Assembly-CSharp.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\Parkitect_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>../../Parkitect_Data/Managed/UnityEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\Parkitect_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>../../Parkitect_Data/Managed/UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\Parkitect_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>../../Parkitect_Data/Managed/UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\Parkitect_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>../../Parkitect_Data/Managed/UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\Parkitect_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <HintPath>../../Parkitect_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assetbundle\assetbundle" />
-    <Content Include="assetbundle\assetbundle.manifest" />
-    <Content Include="assetbundle\reel" />
-    <Content Include="assetbundle\reel.manifest" />
+    <Content Include="assetbundle\assetbundle">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assetbundle\assetbundle.manifest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assetbundle\reel">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assetbundle\reel.manifest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="preview.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TrackRiderUtil\.directory" />
     <Content Include="TrackRiderUtil\.git" />
     <Content Include="TrackRiderUtil\.gitignore" />
