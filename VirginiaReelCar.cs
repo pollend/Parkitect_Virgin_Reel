@@ -35,7 +35,7 @@ public class VirginiaReelCar : BaseCar
 			if (!(track is Station))
 			{
 				float angle = MathHelper.AngleSigned(tangentAxis, nextTangentAxis, normalAxis);
-				rotational_speed +=
+				rotational_speed -=
 				((Mathf.Sign(angle) * Mathf.Sin(Mathf.Abs(angle)) * train.velocity * Time.deltaTime * 2f) /
 				 (.2f * Mathf.PI)) * Mathf.Rad2Deg * Time.deltaTime;
 				if (Mathf.Abs(angle) < .2f)
