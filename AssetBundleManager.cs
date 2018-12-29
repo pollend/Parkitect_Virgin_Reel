@@ -17,6 +17,8 @@ public class AssetBundleManager
 
         CartGo =  assetBundle.LoadAsset<GameObject> ("Cart");
         SideCrossBeamGo =  assetBundle.LoadAsset<GameObject> ("SideCrossBeams");
+        
+        assetBundle.Unload(false);
     }
 
 }
