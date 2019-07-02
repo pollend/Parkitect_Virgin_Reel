@@ -22,15 +22,25 @@ namespace VirginiaReel
     public class Main : IMod
     {
         private TrackRiderBinder binder;
+        private GameObject hider;
 
 
         public string Path
         {
             get { return ModManager.Instance.getModEntries().First(x => x.mod == this).path; }
         }
-
+        
+        private GameObject ProxyObject(GameObject gameObject)
+        {
+            gameObject.transform.SetParent(hider.transform);
+            return gameObject;
+        }
+        
         public void onEnabled()
         {
+            hider = new GameObject();
+            hider.SetActive(false);
+            
             AssetBundleManager assetBundleManager = new AssetBundleManager(this);
 
             binder = new TrackRiderBinder("ed7f0bf864bee459f34bc3e1b426c04e");
@@ -41,7 +51,7 @@ namespace VirginiaReel
             TrackRideHelper.PassMeshGeneratorProperties(TrackRideHelper.GetTrackedRide("Wooden Coaster").meshGenerator,
                 trackedRide.meshGenerator);
 
-            trackGenerator.crossBeamGO = GameObjectHelper.SetUV(assetBundleManager.SideCrossBeamGo, 15, 14);
+            trackGenerator.crossBeamGO = GameObjectHelper.SetUV(ProxyObject(Object.Instantiate(assetBundleManager.SideCrossBeamGo)), 15, 14);
 
             trackedRide.price = 1200;
             trackedRide.maxBankingAngle = 0;
@@ -57,7 +67,7 @@ namespace VirginiaReel
             var coasterCarInstantiator =
                 binder.RegisterCoasterCarInstaniator<CoasterCarInstantiator>(trackedRide, "VirginiaReelInstantiator",
                     "Virginia Reel Car", 1, 1, 1);
-            var virginiaReelCar = binder.RegisterCar<VirginiaReelCar>(assetBundleManager.CartGo,
+            var virginiaReelCar = binder.RegisterCar<VirginiaReelCar>(ProxyObject(Object.Instantiate(assetBundleManager.CartGo)),
                 "VirginiaReelCar", .3f, .1f, true, new[]
                 {
                     new Color(71f / 255, 71f / 255, 71f / 255),
