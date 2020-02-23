@@ -122,8 +122,8 @@ namespace VirginiaReel
             return 0.15f;
         }
 
-        public override float getTunnelWidth()
-        {
+        public override float getTunnelWidth(TrackSegment4 trackSegment, float t)
+        {   
             return 0.7f;
         }
 
