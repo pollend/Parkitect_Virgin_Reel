@@ -131,7 +131,7 @@ namespace VirginiaReel
         {
             return 0.95f;
         }
-
+        
         protected override float railHalfHeight()
         {
             return 0.022835f;
