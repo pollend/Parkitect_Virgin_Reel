@@ -88,7 +88,8 @@ namespace VirginiaReel
                 binormal * (railOffset - (rightRail.width / 2.0f + leftRailInner.width / 2.0f)), tangentPoint, normal);
 
             collisionMeshExtruder.extrude(trackPivot, tangentPoint, normal);
-            if (liftExtruder != null) liftExtruder.extrude(midPoint, tangentPoint, normal);
+            foreach (Extruder lift in this.liftExtruders)
+                lift.extrude(midPoint, tangentPoint, normal);
         }
 
         public override Mesh getMesh(GameObject putMeshOnGO)
@@ -123,7 +124,7 @@ namespace VirginiaReel
         }
 
         public override float getTunnelWidth(TrackSegment4 trackSegment, float t)
-        {   
+        {
             return 0.7f;
         }
 
@@ -131,7 +132,7 @@ namespace VirginiaReel
         {
             return 0.95f;
         }
-        
+
         protected override float railHalfHeight()
         {
             return 0.022835f;
