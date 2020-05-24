@@ -1,0 +1,22 @@
+{
+  "name": "VirginiaReel",
+  "folder": "pollend@VirginiaReel",
+  "version": "v1.0.0",
+  "workshop": "1322016962",
+  "author": "Michael Pollind",
+  "description": null,
+  "preview": "./preview.png",
+  "assemblies": [
+    "System",
+    "System.Core",
+    "System.Data",
+    "UnityEngine",
+    "UnityEngine.AssetBundleModule",
+    "UnityEngine.CoreModule",
+    "Parkitect",
+    "UnityEngine.PhysicsModule"
+  ],
+  "assets": [
+    "assetbundle/**"
+  ]
+}
