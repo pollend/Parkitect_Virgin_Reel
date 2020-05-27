@@ -25,62 +25,56 @@ namespace VirginiaReel
         private const float timeSpentRotating = 3f;
         private readonly float maxRotation = 70f;
 
-        private float rotational_speed;
+        private float rotational_speed = 0;
 
+        private float previousPosition = 0;
 
         protected override void Awake()
         {
             carRotationAxis = transform.Find("rotator");
-            frontAxis = transform.Find("frontAxis");
-            backAxis = transform.Find("backAxis");
             base.Awake();
         }
 
 
         public override void reposition(float deltaTime, float position, int lane, Car previousCar)
         {
+            base.reposition(deltaTime, position, lane, previousCar);
             if (train != null)
             {
-                var tangentAxis = this.track.getTangentPoint(currentTrackPosition);
-                var nextTangentAxis = this.track.getTangentPoint(currentBackTrackPosition);
+                var previousTangent = this.track.getTangentPoint(previousPosition);
+                var currentTangent = this.track.getTangentPoint(position);
+                previousPosition = position;
 
                 var normalAxis = this.track.getNormalPoint(currentTrackPosition);
-                var binormal = Vector3.Cross(normalAxis, tangentAxis).normalized;
-
-
                 var track = this.track.trackSegments[(int) currentTrackPosition];
                 if (!(track is Station))
                 {
-                    var angle = MathHelper.AngleSigned(tangentAxis, nextTangentAxis, normalAxis);
-                    rotational_speed -=
-                        Mathf.Sign(angle) * Mathf.Sin(Mathf.Abs(angle)) * train.velocity * Time.deltaTime * 2f /
-                        (.2f * Mathf.PI) * Mathf.Rad2Deg * Time.deltaTime;
-                    if (Mathf.Abs(angle) < .2f)
-                        rotational_speed -= rotational_speed * .6f * Time.deltaTime;
+                    var deltaAngle = MathHelper.AngleSigned(currentTangent,previousTangent, normalAxis);
+
+                    rotational_speed -= ((Mathf.Sign(deltaAngle) * Mathf.Sin(Mathf.Abs(deltaAngle)) * train.velocity) /
+                                        (.4f * Mathf.PI)) * deltaTime;
+                    rotational_speed -= rotational_speed * .7f * deltaTime;
 
                     if (Mathf.Abs(rotational_speed) > maxRotation)
                         rotational_speed = maxRotation * Mathf.Sign(rotational_speed);
 
                     var additionalRotation =
-                        Mathf.Sign(angle) * Mathf.Sin(Mathf.Abs(angle)) * train.velocity / (.2f * Mathf.PI) *
-                        Mathf.Rad2Deg *
-                        Time.deltaTime;
+                        ((Mathf.Sign(deltaAngle) * Mathf.Sin(Mathf.Abs(deltaAngle)) * train.velocity) / (.4f * Mathf.PI)) * deltaTime;
 
                     carRotationAxis.localRotation *=
-                        Quaternion.AngleAxis(additionalRotation + rotational_speed, Vector3.up);
+                        Quaternion.AngleAxis((additionalRotation + rotational_speed) * Mathf.Rad2Deg, Vector3.up);
                 }
                 else
                 {
-                    rotational_speed -= rotational_speed * .6f * Time.deltaTime;
-
+                    rotational_speed -= rotational_speed * .9f * deltaTime;
                     if (Quaternion.Angle(Quaternion.identity, carRotationAxis.localRotation) > 5f)
                         carRotationAxis.localRotation *=
                             Quaternion.AngleAxis(rotational_speed + Time.deltaTime * 40f, Vector3.up);
                 }
             }
 
-            base.reposition(deltaTime, position, lane, previousCar);
         }
+
 
 
         public override bool isReadyForLettingGuestsInAndOut()
