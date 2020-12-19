@@ -53,7 +53,7 @@ namespace VirginiaReel
 
                     rotational_speed -= ((Mathf.Sign(deltaAngle) * Mathf.Sin(Mathf.Abs(deltaAngle)) * train.velocity) /
                                         (.4f * Mathf.PI)) * deltaTime;
-                    rotational_speed -= rotational_speed * .7f * deltaTime;
+                    rotational_speed -= rotational_speed * .9f * deltaTime;
 
                     if (Mathf.Abs(rotational_speed) > maxRotation)
                         rotational_speed = maxRotation * Mathf.Sign(rotational_speed);

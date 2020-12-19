@@ -19,7 +19,7 @@ using UnityEngine;
 
 namespace VirginiaReel
 {
-    public class Main : IMod
+    public class Main : AbstractMod
     {
         private TrackRiderBinder binder;
         private GameObject hider;
@@ -29,45 +29,72 @@ namespace VirginiaReel
         {
             get { return ModManager.Instance.getModEntries().First(x => x.mod == this).path; }
         }
-        
+
         private GameObject ProxyObject(GameObject gameObject)
         {
             gameObject.transform.SetParent(hider.transform);
             return gameObject;
         }
-        
-        public void onEnabled()
+
+        public override string getName()
+        {
+            return "Virginia Reel";
+        }
+
+        public override string getDescription()
+        {
+            return
+                "The Virginia reel  uses side friction like tracks. The tubs, have inward facing seating which spin freely on a chassis. The tubs are spun as they contacted the edges of the trough.";
+        }
+
+        public override string getVersionNumber()
+        {
+            return "v1.0.0";
+        }
+
+        public override string getIdentifier()
+        {
+            return "VirginiaReel";
+        }
+
+        public override void onEnabled()
         {
             hider = new GameObject();
             hider.SetActive(false);
-            
+
             AssetBundleManager assetBundleManager = new AssetBundleManager(this);
 
             binder = new TrackRiderBinder("ed7f0bf864bee459f34bc3e1b426c04e");
             var trackedRide =
-                binder.RegisterTrackedRide<TrackedRide>("Wooden Coaster", "VirginiaReelCoaster", "Virginia Reel Coaster");
+                binder.RegisterTrackedRide<TrackedRide>("Wooden Coaster", "VirginiaReelCoaster",
+                    "Virginia Reel Coaster");
             var trackGenerator =
                 binder.RegisterMeshGenerator<VirginiaReelTrackGenerator>(trackedRide);
             TrackRideHelper.PassMeshGeneratorProperties(TrackRideHelper.GetTrackedRide("Wooden Coaster").meshGenerator,
                 trackedRide.meshGenerator);
 
-            trackGenerator.crossBeamGO = GameObjectHelper.SetUV(ProxyObject(Object.Instantiate(assetBundleManager.SideCrossBeamGo)), 15, 14);
+
+            trackGenerator.crossBeamGO =
+                GameObjectHelper.SetUV(ProxyObject(Object.Instantiate(assetBundleManager.SideCrossBeamGo)), 15, 14);
 
             trackedRide.price = 1200;
             trackedRide.maxBankingAngle = 0;
             trackedRide.min90CurveSize = 1;
             trackedRide.carTypes = new CoasterCarInstantiator[] { };
+            trackedRide.isSpeedLimited = true;
+            trackedRide.maximumVelocity = 10;
             trackedRide.meshGenerator.customColors = new[]
             {
                 new Color(63f / 255f, 46f / 255f, 37f / 255f, 1), new Color(43f / 255f, 35f / 255f, 35f / 255f, 1),
                 new Color(90f / 255f, 90f / 255f, 90f / 255f, 1)
             };
-            trackedRide.canChangeCarRotation = true;
+            // trackedRide.canChangeCarRotation = true;
 
             var coasterCarInstantiator =
                 binder.RegisterCoasterCarInstaniator<CoasterCarInstantiator>(trackedRide, "VirginiaReelInstantiator",
                     "Virginia Reel Car", 1, 1, 1);
-            var virginiaReelCar = binder.RegisterCar<VirginiaReelCar>(ProxyObject(Object.Instantiate(assetBundleManager.CartGo)),
+            var virginiaReelCar = binder.RegisterCar<VirginiaReelCar>(
+                ProxyObject(Object.Instantiate(assetBundleManager.CartGo)),
                 "VirginiaReelCar", .3f, .1f, true, new[]
                 {
                     new Color(71f / 255, 71f / 255, 71f / 255),
@@ -90,16 +117,10 @@ namespace VirginiaReel
             GameObjectHelper.RegisterDeprecatedMapping("Reel_Car_Front" + oldHash, virginiaReelCar.name);
         }
 
-        public void onDisabled()
+        public override void onDisabled()
         {
             binder.Unload();
         }
 
-        public string Name => "Virginia Reel";
-
-        public string Description =>
-            "The Virginia reel  uses side friction like tracks. The tubs, have inward facing seating which spin freely on a chassis. The tubs are spun as they contacted the edges of the trough.";
-
-        string IMod.Identifier => "VirginiaReel";
     }
 }
